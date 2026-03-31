@@ -1,9 +1,9 @@
-import { Radar, Waves } from "lucide-react";
+import { Radar, Waves, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const ValidatorSection = () => (
-  <section className="py-20 md:py-32 section-border bg-background overflow-hidden">
+  <section className="py-16 md:py-28 section-border bg-background overflow-hidden">
     <div className="max-w-[1440px] mx-auto relative">
       {/* Circular side elements */}
       <motion.div
@@ -26,21 +26,43 @@ const ValidatorSection = () => (
       </motion.div>
 
       <ScrollReveal>
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto py-16 md:py-20 border-2 border-foreground bg-background z-10 relative px-6 md:px-8">
+        <div className="flex flex-col items-center text-center max-w-2xl mx-auto py-14 md:py-20 border-2 border-foreground bg-background z-10 relative px-6 md:px-8">
           <div className="absolute top-0 left-0 right-0 h-1 primary-gradient" />
-          <h2 className="text-3xl md:text-5xl font-black tracking-tighter mb-6 uppercase">
-            Join our Validator Program
+
+          <div className="w-14 h-14 border-2 border-primary flex items-center justify-center mb-6">
+            <Users className="text-primary" size={24} />
+          </div>
+
+          <h2 className="text-3xl md:text-5xl font-black tracking-tighter mb-4 uppercase">
+            Join 69,000+ Validators
           </h2>
-          <p className="text-base md:text-lg font-medium mb-10 px-4 md:px-12">
-            Help secure the most performant network in existence. Stake MST and run professional-grade infrastructure. Earn up to 12% APY.
+          <p className="text-sm md:text-lg font-medium mb-4 px-4 md:px-12 text-on-surface-variant">
+            Help secure the MST network using Proof of Staked Authority consensus. Run a professional-grade validator node and earn staking rewards.
           </p>
-          <motion.button
-            className="px-12 py-4 bg-secondary text-secondary-foreground font-black text-xs uppercase tracking-[0.15em] hover:bg-primary transition-all"
+
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            {[
+              { label: "Active Validators", value: "69,000+" },
+              { label: "Network Uptime", value: "99.99%" },
+              { label: "Block Time", value: "3 sec" },
+            ].map((s) => (
+              <div key={s.label} className="px-4 py-2 border border-foreground/20">
+                <p className="text-[8px] font-black uppercase tracking-[0.15em] text-primary">{s.label}</p>
+                <p className="text-lg font-black italic">{s.value}</p>
+              </div>
+            ))}
+          </div>
+
+          <motion.a
+            href="https://mstvalidator.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-10 py-4 primary-gradient text-primary-foreground font-black text-xs uppercase tracking-[0.15em] hover:opacity-90 transition-all primary-glow-shadow"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
           >
-            Join the System
-          </motion.button>
+            Become a Validator
+          </motion.a>
         </div>
       </ScrollReveal>
     </div>

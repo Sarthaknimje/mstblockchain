@@ -1,31 +1,34 @@
-import { ArrowRight, GitBranch, Network, Code } from "lucide-react";
+import { ArrowRight, Layers, Shield, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const cards = [
   {
-    icon: GitBranch,
-    title: "Protocol",
-    desc: "The core execution layer optimized for parallel transaction processing and state consistency. Built for deterministic finality and MEV resistance.",
-    cta: "View Specs",
+    icon: Layers,
+    title: "EVM Compatible",
+    desc: "Fully compatible with Ethereum Virtual Machine. Deploy your existing Solidity smart contracts directly on MST with zero modifications. Leverage the world's largest developer ecosystem.",
+    cta: "View Architecture",
+    accent: "Layer-1 Infrastructure",
   },
   {
-    icon: Network,
-    title: "P1",
-    desc: "Modular data availability layer designed to ensure network security without sacrificing speed. Erasure-coded redundancy across 12,400+ nodes.",
-    cta: "Explore P1",
+    icon: Shield,
+    title: "PoSA Consensus",
+    desc: "Proof of Staked Authority consensus mechanism with 69,000+ validators securing the network. 3-second block time with deterministic finality and enterprise-grade reliability.",
+    cta: "Explore Validators",
+    accent: "69K+ Validators",
   },
   {
-    icon: Code,
-    title: "P2",
-    desc: "The abstraction-free development toolkit for building native high-performance dApps. Zero-overhead SDK with full WebAssembly support.",
-    cta: "Get the SDK",
+    icon: Zap,
+    title: "SARAL Framework",
+    desc: "Simple, Accessible, Reliable, Affordable, and Limitless. Our infrastructure philosophy ensures Web3 is accessible to everyone — from first-time users to enterprise developers.",
+    cta: "Learn SARAL",
+    accent: "Built for Everyone",
   },
 ];
 
 const WhatIsMST = () => (
-  <section id="foundation" className="py-20 md:py-32 section-border">
-    <div className="grid grid-cols-12 gap-x-[1.4rem] mb-20">
+  <section id="foundation" className="py-16 md:py-28 section-border">
+    <div className="grid grid-cols-12 gap-x-[1.4rem] mb-14 md:mb-20">
       <div className="col-span-12 md:col-span-8">
         <ScrollReveal>
           <span className="label-style text-primary mb-4 block">01 / Foundation</span>
@@ -34,12 +37,21 @@ const WhatIsMST = () => (
           <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-6">What is MST?</h2>
         </ScrollReveal>
         <ScrollReveal delay={0.2}>
-          <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-2xl font-medium">
-            MST Protocol is a decentralized ledger built on the principles of{" "}
-            <span className="text-primary font-black">mechanical precision</span>. It eliminates
-            unnecessary abstractions to provide a raw, high-throughput environment for developers
-            and institutions alike.
+          <p className="text-base md:text-xl text-foreground leading-relaxed max-w-2xl font-medium">
+            MST Blockchain is a{" "}
+            <span className="text-primary font-black">next-generation EVM Compatible Layer-1</span> blockchain
+            designed to make Web3 secure, accessible, and affordable for everyone. With products like BridgeKey Wallet,
+            MST Bridge, and MSTScan, we're creating SARAL infrastructure for real-world Web3 adoption.
           </p>
+        </ScrollReveal>
+      </div>
+      <div className="col-span-12 md:col-span-4 flex items-end justify-end mt-6 md:mt-0">
+        <ScrollReveal delay={0.3}>
+          <div className="text-right">
+            <p className="label-style text-primary mb-2">Consensus</p>
+            <p className="text-sm font-black uppercase">Proof of Staked Authority (PoSA)</p>
+            <p className="text-[10px] text-on-surface-variant mt-1">3s block time · EVM compatible</p>
+          </div>
         </ScrollReveal>
       </div>
     </div>
@@ -47,15 +59,23 @@ const WhatIsMST = () => (
       {cards.map((card, i) => (
         <ScrollReveal key={card.title} delay={0.1 * i}>
           <motion.div
-            className="bg-background border-2 border-foreground p-8 md:p-10 flex flex-col justify-between aspect-auto md:aspect-square group hover:border-primary transition-all duration-300 cursor-pointer"
+            className="bg-background border-2 border-foreground p-7 md:p-10 flex flex-col justify-between min-h-[320px] md:aspect-square group hover:border-primary transition-all duration-300 cursor-pointer relative overflow-hidden"
             whileHover={{ x: 4, y: -4 }}
           >
+            {/* Top gradient on hover */}
+            <div className="absolute top-0 left-0 right-0 h-0 group-hover:h-1 primary-gradient transition-all duration-300" />
+
             <div>
-              <card.icon className="w-10 h-10 mb-8 text-primary transition-transform duration-300 group-hover:scale-110" strokeWidth={1.5} />
-              <h3 className="text-2xl font-black tracking-tight mb-4 uppercase">{card.title}</h3>
+              <div className="flex items-center justify-between mb-6">
+                <card.icon className="w-10 h-10 text-primary transition-transform duration-300 group-hover:scale-110" strokeWidth={1.5} />
+                <span className="text-[8px] font-black uppercase tracking-[0.15em] text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                  {card.accent}
+                </span>
+              </div>
+              <h3 className="text-xl md:text-2xl font-black tracking-tight mb-4 uppercase">{card.title}</h3>
               <p className="text-foreground text-sm leading-relaxed font-medium">{card.desc}</p>
             </div>
-            <div className="flex items-center gap-2 label-style pt-4 border-t border-foreground/10 group-hover:text-primary transition-colors mt-6">
+            <div className="flex items-center gap-2 label-style pt-4 border-t border-foreground/10 group-hover:text-primary transition-colors mt-4">
               {card.cta}
               <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
             </div>
