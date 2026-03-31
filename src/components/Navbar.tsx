@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 const navLinks = [
   { label: "Build", href: "#foundation" },
-  { label: "Learn", href: "#explorer" },
   { label: "Products", href: "#products" },
+  { label: "Explorer", href: "#explorer" },
   { label: "Use Cases", href: "#usecases" },
 ];
 
@@ -15,6 +15,11 @@ const Navbar = () => {
   const [active, setActive] = useState("Build");
 
   const scrollTo = (id: string) => {
+    // If on a sub-page, navigate home first
+    if (window.location.pathname !== "/") {
+      window.location.href = `/${id}`;
+      return;
+    }
     const el = document.querySelector(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
     setOpen(false);
@@ -27,12 +32,12 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
-        <div className="flex items-center gap-12">
+      <div className="flex justify-between items-center px-8 py-3 max-w-[1440px] mx-auto">
+        <div className="flex items-center gap-10">
           <Link className="block font-black text-2xl tracking-tighter" to="/">
             MST<span className="text-primary">.</span>
           </Link>
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <button
                 key={link.label}
@@ -40,14 +45,14 @@ const Navbar = () => {
                   setActive(link.label);
                   scrollTo(link.href);
                 }}
-                className={`font-medium hover:text-primary transition-colors relative ${
+                className={`font-medium hover:text-primary transition-colors relative py-1 ${
                   active === link.label ? "text-primary font-bold" : "text-foreground"
                 }`}
               >
                 {link.label}
                 {active === link.label && (
                   <motion.div
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
+                    className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-primary"
                     layoutId="nav-underline"
                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
                   />
@@ -56,24 +61,24 @@ const Navbar = () => {
             ))}
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <motion.button
-            className="hidden md:block px-5 py-2 bg-primary text-primary-foreground hover:opacity-90 font-black uppercase text-[10px] tracking-[0.15em] transition-all"
+            className="hidden md:block px-4 py-2 primary-gradient text-primary-foreground hover:opacity-90 font-black uppercase text-[10px] tracking-[0.15em] transition-all"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => scrollTo("#ecosystem")}
           >
-            Join our ecosystem
+            Join Ecosystem
           </motion.button>
           <button className="md:hidden" onClick={() => setOpen(!open)}>
-            {open ? <X size={24} /> : <Menu size={24} />}
+            {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
       <AnimatePresence>
         {open && (
           <motion.div
-            className="md:hidden border-t border-foreground/10 px-8 py-6 flex flex-col gap-4 bg-background"
+            className="md:hidden border-t border-foreground/10 px-8 py-5 flex flex-col gap-3 bg-background"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -95,10 +100,10 @@ const Navbar = () => {
               </motion.button>
             ))}
             <button
-              className="mt-2 px-5 py-2 bg-primary text-primary-foreground font-black uppercase text-[10px] tracking-[0.15em]"
+              className="mt-2 px-4 py-2 primary-gradient text-primary-foreground font-black uppercase text-[10px] tracking-[0.15em]"
               onClick={() => scrollTo("#ecosystem")}
             >
-              Join our ecosystem
+              Join Ecosystem
             </button>
           </motion.div>
         )}

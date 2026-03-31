@@ -1,140 +1,115 @@
-import { useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import {
+  Truck, Building2, TrendingUp, HeartPulse, Gamepad2, Fingerprint,
+  Copyright, Zap, Vote, Layers, Leaf, Globe, Briefcase, Radio,
+  Users, BarChart3, Cpu, Shield, Lock, Handshake
+} from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useCasesData } from "@/data/useCases";
 
-const UseCasesSection = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+const icons = [
+  Truck, Building2, TrendingUp, HeartPulse, Gamepad2, Fingerprint,
+  Copyright, Zap, Vote, Layers, Leaf, Globe, Briefcase, Radio,
+  Users, BarChart3, Cpu, Shield, Lock, Handshake,
+];
 
-  const scroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    const amount = 340;
-    scrollRef.current.scrollBy({
-      left: dir === "left" ? -amount : amount,
-      behavior: "smooth",
-    });
-  };
+// Split into 3 rows
+const row1 = useCasesData.slice(0, 7);
+const row2 = useCasesData.slice(7, 14);
+const row3 = useCasesData.slice(14, 20);
+
+// Card sizes — alternate between sizes
+const sizes = ["w-52 h-36", "w-64 h-44", "w-48 h-36", "w-72 h-48", "w-56 h-40", "w-60 h-44", "w-52 h-36"];
+
+type MarqueeRowProps = {
+  items: typeof useCasesData;
+  startIdx: number;
+  speed: number;
+  reverse?: boolean;
+};
+
+const MarqueeRow = ({ items, startIdx, speed, reverse = false }: MarqueeRowProps) => {
+  // Double the items for seamless loop
+  const doubled = [...items, ...items];
 
   return (
-    <section id="usecases" className="py-20 md:py-32 section-border">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-6">
-        <ScrollReveal>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase">Use Cases</h2>
-          <p className="text-on-surface-variant font-medium mt-4 max-w-lg">
-            MST Protocol powers mission-critical applications across 20+ industries. Hover to explore, click to dive deep.
-          </p>
-        </ScrollReveal>
-        <div className="flex gap-3">
-          <motion.button
-            className="w-12 h-12 border-2 border-foreground flex items-center justify-center hover:bg-secondary hover:text-secondary-foreground transition-all"
-            onClick={() => scroll("left")}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <ArrowLeft size={20} />
-          </motion.button>
-          <motion.button
-            className="w-12 h-12 border-2 border-foreground flex items-center justify-center hover:bg-secondary hover:text-secondary-foreground transition-all"
-            onClick={() => scroll("right")}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <ArrowRight size={20} />
-          </motion.button>
-        </div>
-      </div>
-
-      {/* Horizontal scrolling carousel */}
-      <div
-        ref={scrollRef}
-        className="flex gap-4 overflow-x-auto no-scrollbar pb-4 -mx-8 px-8"
+    <div className="overflow-hidden">
+      <motion.div
+        className="flex gap-4"
+        animate={{ x: reverse ? ["0%", "-50%"] : ["-50%", "0%"] }}
+        transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
       >
-        {useCasesData.map((uc, i) => (
-          <motion.div
-            key={uc.id}
-            className="relative flex-shrink-0 border-2 border-foreground cursor-pointer group transition-all duration-500"
-            style={{ width: hoveredIdx === i ? 420 : 200 }}
-            onMouseEnter={() => setHoveredIdx(i)}
-            onMouseLeave={() => setHoveredIdx(null)}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: Math.min(i * 0.03, 0.3) }}
-          >
-            {/* Primary color top bar */}
-            <div className="h-1 primary-gradient" />
+        {doubled.map((uc, i) => {
+          const Icon = icons[(startIdx + (i % items.length)) % icons.length];
+          const size = sizes[(i % items.length) % sizes.length];
+          const globalIdx = startIdx + (i % items.length);
 
-            <div className="p-6 h-64 flex flex-col justify-between overflow-hidden">
-              <div>
-                <p className="text-[8px] font-black uppercase tracking-[0.2em] text-primary mb-2">
+          return (
+            <Link
+              key={`${uc.id}-${i}`}
+              to={`/use-case/${uc.id}`}
+              className={`flex-shrink-0 ${size} border-2 border-foreground/30 p-5 flex flex-col justify-between 
+                hover:border-primary hover:primary-glow-shadow transition-all duration-300 group cursor-pointer relative overflow-hidden`}
+            >
+              {/* Accent top bar on hover */}
+              <div className="absolute top-0 left-0 right-0 h-0 group-hover:h-1 primary-gradient transition-all duration-300" />
+
+              <div className="flex items-start justify-between">
+                <Icon
+                  size={20}
+                  className="text-primary opacity-60 group-hover:opacity-100 transition-opacity"
+                  strokeWidth={1.5}
+                />
+                <span className="text-[8px] font-black uppercase tracking-[0.2em] text-primary">
                   {uc.num}
-                </p>
-                <h4 className="text-xs font-black uppercase leading-tight mb-3">
-                  {uc.title}
-                </h4>
-
-                <AnimatePresence>
-                  {hoveredIdx === i && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <p className="text-[11px] text-on-surface-variant leading-relaxed mb-3">
-                        {uc.short}
-                      </p>
-                      <div className="flex flex-wrap gap-1 mb-3">
-                        {uc.features.slice(0, 3).map((f) => (
-                          <span
-                            key={f}
-                            className="text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 border border-primary/30 text-primary"
-                          >
-                            {f}
-                          </span>
-                        ))}
-                      </div>
-                      <p className="text-[9px] font-black text-primary">{uc.metric}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                </span>
               </div>
 
-              <AnimatePresence>
-                {hoveredIdx === i && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ delay: 0.1 }}
-                  >
-                    <Link
-                      to={`/use-case/${uc.id}`}
-                      className="inline-flex items-center gap-2 label-style text-primary hover:underline"
-                    >
-                      Explore <ExternalLink size={10} />
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+              <div>
+                <h4 className="text-[11px] font-black uppercase leading-tight mb-1 group-hover:text-primary transition-colors">
+                  {uc.title}
+                </h4>
+                <p className="text-[9px] text-on-surface-variant leading-snug opacity-0 group-hover:opacity-100 transition-opacity duration-300 line-clamp-2">
+                  {uc.short}
+                </p>
+              </div>
 
-            {/* Hover border effect */}
-            {hoveredIdx === i && (
-              <motion.div
-                className="absolute inset-0 border-2 border-primary pointer-events-none"
-                layoutId="use-case-border"
-                transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              />
-            )}
-          </motion.div>
-        ))}
-      </div>
-    </section>
+              {/* Metric badge */}
+              <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-[7px] font-black text-primary uppercase">{uc.metric}</span>
+              </div>
+            </Link>
+          );
+        })}
+      </motion.div>
+    </div>
   );
 };
+
+const UseCasesSection = () => (
+  <section id="usecases" className="py-16 md:py-28 section-border overflow-hidden">
+    <div className="max-w-[1440px] mx-auto px-8 mb-10 md:mb-14">
+      <ScrollReveal>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <span className="label-style text-primary mb-3 block">20+ Industries</span>
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase">Use Cases</h2>
+          </div>
+          <p className="text-on-surface-variant font-medium max-w-md text-sm">
+            MST Protocol powers mission-critical applications across industries. Hover to preview, click to dive deep.
+          </p>
+        </div>
+      </ScrollReveal>
+    </div>
+
+    {/* 3-Row Infinite Marquee */}
+    <div className="space-y-4">
+      <MarqueeRow items={row1} startIdx={0} speed={40} />
+      <MarqueeRow items={row2} startIdx={7} speed={35} reverse />
+      <MarqueeRow items={row3} startIdx={14} speed={45} />
+    </div>
+  </section>
+);
 
 export default UseCasesSection;

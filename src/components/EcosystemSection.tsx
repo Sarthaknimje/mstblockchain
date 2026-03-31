@@ -1,4 +1,4 @@
-import { Shield, Megaphone, Landmark } from "lucide-react";
+import { Shield, Megaphone, Landmark, Wallet } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -6,38 +6,54 @@ const roles = [
   {
     icon: Shield,
     title: "Validator",
-    desc: "Secure the network and earn rewards by running a high-performance node. Minimum stake: 10,000 MST.",
+    desc: "Secure the MST network using PoSA consensus and earn staking rewards. Join 69,000+ validators worldwide.",
+    metric: "69K+ active",
   },
   {
     icon: Megaphone,
     title: "Ambassador",
-    desc: "Grow the community and represent the MST brand across the globe. Join 200+ ambassadors worldwide.",
+    desc: "Represent MST globally. Create content, host events, and grow the Web3 community across regions.",
+    metric: "Global reach",
   },
   {
     icon: Landmark,
     title: "Grants",
-    desc: "Funding for developers building the future of structural web3 purity. Up to $250K per project.",
+    desc: "Apply for funding to build innovative dApps, tools, and infrastructure on the MST network.",
+    metric: "Open applications",
+  },
+  {
+    icon: Wallet,
+    title: "Developer",
+    desc: "Build with full EVM compatibility. Deploy Solidity contracts, use familiar tools, and access our SDK.",
+    metric: "EVM compatible",
   },
 ];
 
 const EcosystemSection = () => (
-  <section id="ecosystem" className="py-20 md:py-32 section-border">
-    <div className="text-center mb-12 md:mb-20">
+  <section id="ecosystem" className="py-16 md:py-28 section-border">
+    <div className="text-center mb-10 md:mb-16">
       <ScrollReveal>
-        <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase">Join our ecosystem</h2>
+        <span className="label-style text-primary mb-3 block">Growing Community</span>
+        <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase">Join Our Ecosystem</h2>
+        <p className="text-on-surface-variant font-medium mt-4 max-w-lg mx-auto text-sm">
+          300,000+ registered users and growing. Be part of the SARAL revolution.
+        </p>
       </ScrollReveal>
     </div>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-x-[1.4rem] gap-y-6 mb-16">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
       {roles.map((role, i) => (
-        <ScrollReveal key={role.title} delay={i * 0.1}>
+        <ScrollReveal key={role.title} delay={i * 0.08}>
           <motion.div
-            className="border-2 border-foreground p-10 md:p-12 text-center hover:bg-secondary hover:text-secondary-foreground transition-colors group cursor-pointer relative overflow-hidden"
+            className="border-2 border-foreground p-8 text-center hover:bg-secondary hover:text-secondary-foreground transition-colors group cursor-pointer relative overflow-hidden h-full"
             whileHover={{ y: -4 }}
           >
             <div className="absolute top-0 left-0 right-0 h-0 group-hover:h-1 primary-gradient transition-all duration-300" />
-            <role.icon className="w-12 h-12 mx-auto mb-6 text-primary group-hover:text-primary-foreground transition-colors" strokeWidth={1.5} />
-            <h3 className="text-2xl font-black mb-4 uppercase">{role.title}</h3>
-            <p className="text-sm font-medium opacity-70">{role.desc}</p>
+            <role.icon className="w-10 h-10 mx-auto mb-4 text-primary group-hover:text-primary-foreground transition-colors" strokeWidth={1.5} />
+            <h3 className="text-xl font-black mb-3 uppercase">{role.title}</h3>
+            <p className="text-sm font-medium opacity-70 mb-4">{role.desc}</p>
+            <span className="text-[9px] font-black uppercase tracking-[0.15em] text-primary group-hover:text-primary-foreground/80 transition-colors">
+              {role.metric}
+            </span>
           </motion.div>
         </ScrollReveal>
       ))}
@@ -45,7 +61,7 @@ const EcosystemSection = () => (
     <ScrollReveal>
       <div className="flex flex-col items-center gap-4">
         <motion.button
-          className="px-12 py-4 bg-primary text-primary-foreground font-black text-sm uppercase tracking-[0.15em] hover:bg-secondary transition-colors"
+          className="px-10 py-4 primary-gradient text-primary-foreground font-black text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-colors primary-glow-shadow"
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
         >
