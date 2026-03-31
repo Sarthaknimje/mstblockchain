@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import mstLogo from "@/assets/mst-logo.png";
 
 const navLinks = [
   { label: "Build", href: "#foundation" },
@@ -15,7 +16,6 @@ const Navbar = () => {
   const [active, setActive] = useState("Build");
 
   const scrollTo = (id: string) => {
-    // If on a sub-page, navigate home first
     if (window.location.pathname !== "/") {
       window.location.href = `/${id}`;
       return;
@@ -27,15 +27,27 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="w-full top-0 z-50 sticky bg-background/95 backdrop-blur-sm border-b border-foreground/10 text-sm tracking-tight"
+      className="w-full top-0 z-50 sticky bg-background/80 backdrop-blur-md border-b border-foreground/10 text-sm tracking-tight"
       initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="flex justify-between items-center px-8 py-3 max-w-[1440px] mx-auto">
+      {/* Top gradient line */}
+      <div className="h-[2px] primary-gradient" />
+
+      <div className="flex justify-between items-center px-8 py-2.5 max-w-[1440px] mx-auto">
         <div className="flex items-center gap-10">
-          <Link className="block font-black text-2xl tracking-tighter" to="/">
-            MST<span className="text-primary">.</span>
+          <Link className="flex items-center gap-2.5" to="/">
+            <motion.img
+              src={mstLogo}
+              alt="MST Blockchain"
+              className="h-9 w-auto"
+              whileHover={{ scale: 1.08, rotate: 5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            />
+            <span className="font-black text-xl tracking-tighter hidden sm:block">
+              MST<span className="text-primary">.</span>
+            </span>
           </Link>
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
@@ -63,7 +75,7 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-3">
           <motion.button
-            className="hidden md:block px-4 py-2 primary-gradient text-primary-foreground hover:opacity-90 font-black uppercase text-[10px] tracking-[0.15em] transition-all"
+            className="hidden md:block px-4 py-2 primary-gradient text-primary-foreground hover:opacity-90 font-black uppercase text-[10px] tracking-[0.15em] transition-all primary-glow-shadow"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => scrollTo("#ecosystem")}

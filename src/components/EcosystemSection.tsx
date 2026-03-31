@@ -30,8 +30,11 @@ const roles = [
 ];
 
 const EcosystemSection = () => (
-  <section id="ecosystem" className="py-16 md:py-28 section-border">
-    <div className="text-center mb-10 md:mb-16">
+  <section id="ecosystem" className="py-16 md:py-28 section-border relative overflow-hidden">
+    {/* Gradient accents */}
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-primary/4 blur-3xl float-orb pointer-events-none" />
+
+    <div className="text-center mb-10 md:mb-16 relative z-10">
       <ScrollReveal>
         <span className="label-style text-primary mb-3 block">Growing Community</span>
         <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase">Join Our Ecosystem</h2>
@@ -40,11 +43,11 @@ const EcosystemSection = () => (
         </p>
       </ScrollReveal>
     </div>
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 relative z-10">
       {roles.map((role, i) => (
         <ScrollReveal key={role.title} delay={i * 0.08}>
           <motion.div
-            className="border-2 border-foreground p-8 text-center hover:bg-secondary hover:text-secondary-foreground transition-colors group cursor-pointer relative overflow-hidden h-full"
+            className="border-2 border-foreground p-8 text-center hover:bg-secondary hover:text-secondary-foreground transition-colors group cursor-pointer relative overflow-hidden h-full gradient-border-glow"
             whileHover={{ y: -4 }}
           >
             <div className="absolute top-0 left-0 right-0 h-0 group-hover:h-1 primary-gradient transition-all duration-300" />
@@ -59,7 +62,7 @@ const EcosystemSection = () => (
       ))}
     </div>
     <ScrollReveal>
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-4 relative z-10">
         <motion.button
           className="px-10 py-4 primary-gradient text-primary-foreground font-black text-sm uppercase tracking-[0.15em] hover:opacity-90 transition-colors primary-glow-shadow"
           whileHover={{ scale: 1.03 }}

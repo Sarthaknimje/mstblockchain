@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Wallet, Search, Users, ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import mstLogo from "@/assets/mst-logo.png";
 import productWallet from "@/assets/product-wallet.jpg";
 import productExplorer from "@/assets/product-explorer.jpg";
 import productBridge from "@/assets/product-bridge.jpg";
@@ -32,9 +33,16 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="grid grid-cols-12 gap-x-[1.4rem] pt-10 md:pt-16 pb-16 md:pb-28 items-center">
+    <section className="relative grid grid-cols-12 gap-x-[1.4rem] pt-10 md:pt-16 pb-16 md:pb-28 items-center overflow-hidden">
+      {/* Dynamic gradient background orbs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary/5 blur-3xl float-orb" />
+        <div className="absolute top-1/2 -right-20 w-80 h-80 rounded-full bg-primary/8 blur-3xl float-orb-delay" />
+        <div className="absolute -bottom-20 left-1/3 w-72 h-72 rounded-full bg-primary/4 blur-3xl float-orb-slow" />
+      </div>
+
       {/* Left Column */}
-      <div className="col-span-12 lg:col-span-6 flex flex-col items-start">
+      <div className="col-span-12 lg:col-span-6 flex flex-col items-start relative z-10">
         <motion.span
           className="inline-block py-1.5 px-4 primary-gradient text-primary-foreground text-[10px] font-black uppercase tracking-[0.2em] mb-6"
           initial={{ opacity: 0, x: -20 }}
@@ -62,7 +70,6 @@ const HeroSection = () => {
         >
           MST Blockchain is a next-generation EVM Compatible Layer-1 blockchain, designed to make Web3{" "}
           <span className="text-primary font-black">secure, accessible, and affordable</span> for everyone.
-          Build, explore, and interact with decentralized applications using familiar tools and a growing ecosystem.
         </motion.p>
 
         <motion.div
@@ -74,7 +81,7 @@ const HeroSection = () => {
           {["Simple", "Accessible", "Reliable", "Affordable", "Limitless"].map((word, i) => (
             <motion.span
               key={word}
-              className="px-3 py-1 border border-primary/30 text-primary text-[10px] font-black uppercase tracking-[0.15em]"
+              className="px-3 py-1 border border-primary/30 text-primary text-[10px] font-black uppercase tracking-[0.15em] shimmer"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 + i * 0.05 }}
@@ -141,16 +148,25 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Right Column: Product Carousel */}
+      {/* Right Column: Product Carousel with Logo */}
       <motion.div
         className="col-span-12 lg:col-span-6 relative mt-12 lg:mt-0"
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.5, duration: 0.8 }}
       >
-        <div className="relative">
+        {/* Floating logo behind */}
+        <motion.img
+          src={mstLogo}
+          alt=""
+          className="absolute -top-10 -right-10 w-40 h-40 opacity-5 z-0"
+          animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.05, 0.95, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        <div className="relative z-10">
           {/* Product image with border */}
-          <div className="aspect-square border-2 border-foreground overflow-hidden relative primary-glow-shadow">
+          <div className="aspect-square border-2 border-foreground overflow-hidden relative primary-glow-shadow gradient-border-glow">
             <div className="absolute top-0 left-0 right-0 h-1 primary-gradient z-10" />
             {products.map((product, i) => (
               <motion.img
@@ -159,7 +175,7 @@ const HeroSection = () => {
                 alt={product.name}
                 className="absolute inset-0 w-full h-full object-cover"
                 initial={false}
-                animate={{ opacity: currentProduct === i ? 1 : 0 }}
+                animate={{ opacity: currentProduct === i ? 1 : 0, scale: currentProduct === i ? 1 : 1.05 }}
                 transition={{ duration: 1 }}
                 width={1024}
                 height={1024}
@@ -167,6 +183,12 @@ const HeroSection = () => {
             ))}
             {/* Overlay gradient */}
             <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent z-10" />
+
+            {/* MST logo watermark in corner */}
+            <div className="absolute top-4 right-4 z-20 opacity-60">
+              <img src={mstLogo} alt="" className="w-8 h-8" />
+            </div>
+
             {/* Product name overlay */}
             <motion.div
               className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-20"

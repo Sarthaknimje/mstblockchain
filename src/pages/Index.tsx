@@ -12,21 +12,26 @@ import Footer from "@/components/Footer";
 import ColorPicker from "@/components/ColorPicker";
 
 const Index = () => (
-  <div className="min-h-screen bg-background text-foreground">
-    <Navbar />
-    <ColorPicker />
-    <main className="max-w-[1440px] mx-auto px-8">
-      <HeroSection />
-      <WhatIsMST />
-      <ProductsSection />
-      <ValidatorSection />
-      <ExplorerSection />
-      <EcosystemSection />
-      <UseCasesSection />
-      <BlogsSection />
-      <SecurityBanner />
-    </main>
-    <Footer />
+  <div className="min-h-screen bg-background text-foreground relative">
+    {/* Global animated gradient mesh background */}
+    <div className="fixed inset-0 pointer-events-none z-0 gradient-mesh opacity-70" />
+    
+    <div className="relative z-10">
+      <Navbar />
+      <ColorPicker />
+      <main className="max-w-[1440px] mx-auto px-8">
+        <HeroSection />
+        <WhatIsMST />
+        <ProductsSection />
+        <ValidatorSection />
+        <ExplorerSection />
+        <EcosystemSection />
+        <UseCasesSection />
+        <BlogsSection />
+        <SecurityBanner />
+      </main>
+      <Footer />
+    </div>
   </div>
 );
 
