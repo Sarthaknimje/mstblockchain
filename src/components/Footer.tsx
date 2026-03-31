@@ -1,15 +1,27 @@
 import { Share2, AtSign, Terminal, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import mstLogo from "@/assets/mst-logo.png";
 
 const Footer = () => (
-  <footer className="w-full border-t-4 border-foreground bg-background">
+  <footer className="w-full border-t-4 border-foreground bg-background relative overflow-hidden">
     <div className="h-1 primary-gradient" />
 
-    <div className="max-w-[1440px] mx-auto px-8 py-14 md:py-20 grid grid-cols-12 gap-8 md:gap-12">
+    {/* Background gradient */}
+    <div className="absolute inset-0 pointer-events-none gradient-mesh opacity-40" />
+
+    <div className="max-w-[1440px] mx-auto px-8 py-14 md:py-20 grid grid-cols-12 gap-8 md:gap-12 relative z-10">
       <div className="col-span-12 md:col-span-4">
-        <Link className="block mb-5 font-black text-3xl tracking-tighter" to="/">
-          MST<span className="text-primary">.</span>
+        <Link className="flex items-center gap-3 mb-5" to="/">
+          <motion.img
+            src={mstLogo}
+            alt="MST Blockchain"
+            className="h-12 w-auto"
+            whileHover={{ scale: 1.1, rotate: 5 }}
+          />
+          <span className="font-black text-2xl tracking-tighter">
+            MST<span className="text-primary">.</span>
+          </span>
         </Link>
         <p className="text-sm font-medium text-on-surface-variant mb-6 max-w-xs uppercase leading-snug">
           Next-gen EVM Compatible Layer-1 blockchain. SARAL infrastructure for real-world Web3 adoption.
@@ -70,7 +82,7 @@ const Footer = () => (
         </div>
       </div>
     </div>
-    <div className="border-t border-foreground/10 py-5 px-8 text-center">
+    <div className="border-t border-foreground/10 py-5 px-8 text-center relative z-10">
       <p className="text-[9px] font-black text-foreground/40 uppercase tracking-[0.2em]">
         © 2025 MST Blockchain. ALL RIGHTS RESERVED. SARAL — SIMPLE, ACCESSIBLE, RELIABLE, AFFORDABLE, LIMITLESS.
       </p>

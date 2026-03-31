@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LayoutGrid, ArrowLeftRight, Zap } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 
-// Generate mock block data
 const generateBlock = (baseNum: number) => ({
   id: `#${(12845291 + baseNum).toLocaleString()}`,
   time: `${(Math.random() * 2 + 0.2).toFixed(1)}s ago`,
@@ -46,8 +45,11 @@ const ExplorerSection = () => {
   }, [addNewBlock, addNewTx]);
 
   return (
-    <section id="explorer" className="py-16 md:py-28 section-border">
-      <div className="grid grid-cols-12 gap-x-[1.4rem]">
+    <section id="explorer" className="py-16 md:py-28 section-border relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-primary/4 blur-3xl float-orb-slow pointer-events-none" />
+
+      <div className="grid grid-cols-12 gap-x-[1.4rem] relative z-10">
         <div className="col-span-12 mb-10 md:mb-16">
           <ScrollReveal>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -70,7 +72,7 @@ const ExplorerSection = () => {
         {/* Blocks */}
         <div className="col-span-12 md:col-span-6">
           <ScrollReveal>
-            <div className="border-2 border-foreground p-5 md:p-6">
+            <div className="border-2 border-foreground p-5 md:p-6 gradient-border-glow">
               <div className="flex justify-between items-center mb-6 border-b-2 border-foreground pb-3">
                 <h3 className="text-base md:text-lg font-black uppercase">Latest Blocks</h3>
                 <LayoutGrid size={18} className="text-primary" />
@@ -111,7 +113,7 @@ const ExplorerSection = () => {
         {/* Transactions */}
         <div className="col-span-12 md:col-span-6 mt-4 md:mt-0">
           <ScrollReveal delay={0.15}>
-            <div className="border-2 border-foreground p-5 md:p-6">
+            <div className="border-2 border-foreground p-5 md:p-6 gradient-border-glow">
               <div className="flex justify-between items-center mb-6 border-b-2 border-foreground pb-3">
                 <h3 className="text-base md:text-lg font-black uppercase">Latest Transactions</h3>
                 <ArrowLeftRight size={18} className="text-primary" />

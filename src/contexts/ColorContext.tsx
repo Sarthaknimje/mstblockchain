@@ -35,12 +35,10 @@ export const COLOR_PRESETS = [
 function applyColorToDocument(h: number, s: number, l: number) {
   const root = document.documentElement;
   root.style.setProperty("--primary", `${h} ${s}% ${l}%`);
-  // Derive glow/lighter version
   root.style.setProperty("--primary-glow", `${h} ${Math.min(s + 10, 100)}% ${Math.min(l + 15, 85)}%`);
-  // Derive darker version for gradients
   root.style.setProperty("--primary-dark", `${h} ${s}% ${Math.max(l - 15, 15)}%`);
-  // Ring color
   root.style.setProperty("--ring", `${h} ${s}% ${l}%`);
+  root.style.setProperty("--sidebar-ring", `${h} ${s}% ${l}%`);
 }
 
 export const ColorProvider = ({ children }: { children: ReactNode }) => {
