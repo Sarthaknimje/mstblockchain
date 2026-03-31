@@ -9,10 +9,12 @@ import UseCasesSection from "@/components/UseCasesSection";
 import BlogsSection from "@/components/BlogsSection";
 import SecurityBanner from "@/components/SecurityBanner";
 import Footer from "@/components/Footer";
+import ColorPicker from "@/components/ColorPicker";
 
 const Index = () => (
   <div className="min-h-screen bg-background text-foreground">
     <Navbar />
+    <ColorPicker />
     <main className="max-w-[1440px] mx-auto px-8">
       <HeroSection />
       <WhatIsMST />
