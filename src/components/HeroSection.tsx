@@ -67,7 +67,7 @@ const HeroSection = () => {
 
       {/* Right Column: Carousel */}
       <div className="col-span-12 md:col-span-6 relative mt-16 md:mt-0" style={{ perspective: "2000px" }}>
-        <div className="aspect-[4/5] relative" style={{ transform: "rotateY(-15deg) rotateX(5deg)", transformStyle: "preserve3d", transition: "transform 0.5s ease-out" }}>
+        <div className="aspect-[4/5] relative" style={{ transform: "rotateY(-15deg) rotateX(5deg)", transformStyle: "preserve-3d", transition: "transform 0.5s ease-out" }}>
           <div className="absolute inset-0 bg-background border-2 border-foreground blueprint-grid"></div>
           <div className="absolute inset-0 overflow-hidden fade-mask">
             {slides.map((src, i) => (
