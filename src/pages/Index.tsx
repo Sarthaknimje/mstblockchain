@@ -16,6 +16,25 @@ const Index = () => (
     {/* Global animated gradient mesh background */}
     <div className="fixed inset-0 pointer-events-none z-0 gradient-mesh opacity-70" />
     
+    {/* Animated background bubbles */}
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full float-orb"
+          style={{
+            width: `${80 + i * 40}px`,
+            height: `${80 + i * 40}px`,
+            left: `${10 + i * 15}%`,
+            top: `${20 + (i % 3) * 25}%`,
+            background: `radial-gradient(circle, hsl(var(--primary) / ${0.03 + i * 0.01}), transparent 70%)`,
+            animationDelay: `${i * -3}s`,
+            animationDuration: `${15 + i * 5}s`,
+          }}
+        />
+      ))}
+    </div>
+
     <div className="relative z-10">
       <Navbar />
       <ColorPicker />
