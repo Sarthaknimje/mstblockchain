@@ -9,6 +9,8 @@ const navLinks = [
   { label: "Products", href: "#products" },
   { label: "Explorer", href: "#explorer" },
   { label: "Use Cases", href: "#usecases" },
+  { label: "Grants", href: "/grants", isRoute: true },
+  { label: "Academy", href: "/academy", isRoute: true },
 ];
 
 const Navbar = () => {
@@ -32,7 +34,6 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      {/* Top gradient line */}
       <div className="h-[2px] primary-gradient" />
 
       <div className="flex justify-between items-center px-8 py-2.5 max-w-[1440px] mx-auto">
@@ -50,27 +51,37 @@ const Navbar = () => {
             </span>
           </Link>
           <div className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <button
-                key={link.label}
-                onClick={() => {
-                  setActive(link.label);
-                  scrollTo(link.href);
-                }}
-                className={`font-medium hover:text-primary transition-colors relative py-1 ${
-                  active === link.label ? "text-primary font-bold" : "text-foreground"
-                }`}
-              >
-                {link.label}
-                {active === link.label && (
-                  <motion.div
-                    className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-primary"
-                    layoutId="nav-underline"
-                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                  />
-                )}
-              </button>
-            ))}
+            {navLinks.map((link) =>
+              link.isRoute ? (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="font-medium hover:text-primary transition-colors relative py-1"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <button
+                  key={link.label}
+                  onClick={() => {
+                    setActive(link.label);
+                    scrollTo(link.href);
+                  }}
+                  className={`font-medium hover:text-primary transition-colors relative py-1 ${
+                    active === link.label ? "text-primary font-bold" : "text-foreground"
+                  }`}
+                >
+                  {link.label}
+                  {active === link.label && (
+                    <motion.div
+                      className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-primary"
+                      layoutId="nav-underline"
+                      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                    />
+                  )}
+                </button>
+              )
+            )}
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -96,21 +107,32 @@ const Navbar = () => {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {navLinks.map((link, i) => (
-              <motion.button
-                key={link.label}
-                className="font-medium text-foreground hover:text-primary text-left"
-                initial={{ x: -20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: i * 0.05 }}
-                onClick={() => {
-                  setActive(link.label);
-                  scrollTo(link.href);
-                }}
-              >
-                {link.label}
-              </motion.button>
-            ))}
+            {navLinks.map((link, i) =>
+              link.isRoute ? (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="font-medium text-foreground hover:text-primary"
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <motion.button
+                  key={link.label}
+                  className="font-medium text-foreground hover:text-primary text-left"
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: i * 0.05 }}
+                  onClick={() => {
+                    setActive(link.label);
+                    scrollTo(link.href);
+                  }}
+                >
+                  {link.label}
+                </motion.button>
+              )
+            )}
             <button
               className="mt-2 px-4 py-2 primary-gradient text-primary-foreground font-black uppercase text-[10px] tracking-[0.15em]"
               onClick={() => scrollTo("#ecosystem")}
