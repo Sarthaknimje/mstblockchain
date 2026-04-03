@@ -6,17 +6,15 @@ const SecurityBanner = () => (
   <section className="pb-16 md:pb-28">
     <ScrollReveal>
       <motion.div
-        className="border-2 border-foreground p-8 md:p-14 flex flex-col justify-center min-h-[280px] relative overflow-hidden text-center group gradient-border-glow"
-        whileHover={{ borderColor: "hsl(var(--primary))" }}
+        className="border-2 border-foreground/20 p-8 md:p-14 flex flex-col justify-center min-h-[280px] relative overflow-hidden text-center group"
+        whileHover={{ borderColor: "hsl(var(--primary) / 0.5)" }}
         transition={{ duration: 0.3 }}
       >
-        {/* Decorative gradient fills */}
-        <div className="absolute inset-0 gradient-mesh-intense opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-40 h-40 bg-primary opacity-5 transform translate-x-20 -translate-y-20 rotate-45" />
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary opacity-5 transform -translate-x-16 translate-y-16 rotate-45" />
-        <div className="absolute top-0 left-0 right-0 h-0 group-hover:h-1 primary-gradient transition-all duration-500" />
+        {/* Multi-layer gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary-glow/3 pointer-events-none" />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-br from-violet-500/5 via-primary/8 to-cyan-500/5" />
+        <div className="absolute top-0 left-0 right-0 h-0 group-hover:h-1.5 primary-gradient transition-all duration-500" />
 
-        {/* Floating MST logo */}
         <motion.img
           src={mstLogo}
           alt=""
@@ -31,12 +29,16 @@ const SecurityBanner = () => (
             Built on <span className="primary-gradient-text">Structural Purity.</span>
           </h3>
           <p className="text-foreground font-medium max-w-2xl mx-auto mb-8 text-sm md:text-base">
-            MST's Proof of Staked Authority consensus is designed to withstand adversarial conditions while maintaining
-            3-second block finality. 69,000+ validators, 161,000+ wallets, 300,000+ users — and growing every day.
+            69,000+ validators, 161,000+ wallets, 300,000+ users — and growing every day.
           </p>
           <div className="flex flex-wrap justify-center gap-3 mb-8">
-            {["EVM Compatible", "PoSA Consensus", "3s Finality", "SARAL Framework"].map((tag) => (
-              <span key={tag} className="px-3 py-1 border border-primary/30 text-[9px] font-black uppercase tracking-[0.15em] text-primary shimmer">
+            {[
+              { tag: "EVM Compatible", color: "border-cyan-500/30 text-cyan-500 bg-cyan-500/5" },
+              { tag: "PoSA Consensus", color: "border-violet-500/30 text-violet-500 bg-violet-500/5" },
+              { tag: "3s Finality", color: "border-emerald-500/30 text-emerald-500 bg-emerald-500/5" },
+              { tag: "SARAL Framework", color: "border-amber-500/30 text-amber-500 bg-amber-500/5" },
+            ].map(({ tag, color }) => (
+              <span key={tag} className={`px-3 py-1 border ${color} text-[9px] font-black uppercase tracking-[0.15em]`}>
                 {tag}
               </span>
             ))}
