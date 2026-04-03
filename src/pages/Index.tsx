@@ -10,26 +10,40 @@ import BlogsSection from "@/components/BlogsSection";
 import SecurityBanner from "@/components/SecurityBanner";
 import Footer from "@/components/Footer";
 import ColorPicker from "@/components/ColorPicker";
+import { motion } from "framer-motion";
 
 const Index = () => (
   <div className="min-h-screen bg-background text-foreground relative">
-    {/* Global animated gradient mesh background */}
-    <div className="fixed inset-0 pointer-events-none z-0 gradient-mesh opacity-70" />
+    {/* Multi-layer animated gradient mesh */}
+    <div className="fixed inset-0 pointer-events-none z-0">
+      <div className="absolute inset-0 gradient-mesh opacity-70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/3 via-transparent to-primary/2 opacity-50" />
+    </div>
     
-    {/* Animated background bubbles */}
+    {/* Animated Web3 background elements */}
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {Array.from({ length: 6 }).map((_, i) => (
-        <div
+      {Array.from({ length: 8 }).map((_, i) => (
+        <motion.div
           key={i}
-          className="absolute rounded-full float-orb"
+          className="absolute rounded-full"
           style={{
-            width: `${80 + i * 40}px`,
-            height: `${80 + i * 40}px`,
-            left: `${10 + i * 15}%`,
-            top: `${20 + (i % 3) * 25}%`,
-            background: `radial-gradient(circle, hsl(var(--primary) / ${0.03 + i * 0.01}), transparent 70%)`,
-            animationDelay: `${i * -3}s`,
-            animationDuration: `${15 + i * 5}s`,
+            width: `${100 + i * 50}px`,
+            height: `${100 + i * 50}px`,
+            left: `${5 + i * 12}%`,
+            top: `${15 + (i % 4) * 20}%`,
+            background: `radial-gradient(circle, hsl(var(--primary) / ${0.04 + i * 0.01}), hsl(var(--primary-glow) / ${0.02}), transparent 70%)`,
+            filter: "blur(30px)",
+          }}
+          animate={{
+            y: [0, -30, 15, -25, 0],
+            x: [0, 15, -10, 20, 0],
+            scale: [1, 1.15, 0.9, 1.1, 1],
+          }}
+          transition={{
+            duration: 14 + i * 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: i * 2,
           }}
         />
       ))}
