@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Explorer", href: "#explorer" },
   { label: "Use Cases", href: "#usecases" },
   { label: "Grants", href: "/grants", isRoute: true },
+  { label: "Ambassador", href: "/ambassador", isRoute: true },
   { label: "Academy", href: "/academy", isRoute: true },
 ];
 
