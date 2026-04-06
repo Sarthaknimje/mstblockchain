@@ -184,7 +184,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.7 }}
         >
-          ENGINEERING<br />
+          {t("hero.title1")}<br />
           <span className="primary-gradient-text">
             {displayText}
             <motion.span
