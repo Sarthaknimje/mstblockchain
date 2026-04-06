@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Wallet, Search, Users, ArrowRight, Zap, Shield, Globe, Cpu, Hexagon, Triangle } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/contexts/LanguageContext";
 import mstLogo from "@/assets/mst-logo.png";
 
 const products = [
@@ -112,6 +113,7 @@ const Web3Background = () => (
 );
 
 const HeroSection = () => {
+  const { t } = useLanguage();
   const [currentProduct, setCurrentProduct] = useState(0);
   const [wordIdx, setWordIdx] = useState(0);
   const [displayText, setDisplayText] = useState("");
@@ -174,7 +176,7 @@ const HeroSection = () => {
             animate={{ x: ["-100%", "200%"] }}
             transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
           />
-          Next-Gen EVM Layer-1 Blockchain
+          {t("hero.badge")}
         </motion.span>
 
         <motion.h1
@@ -183,7 +185,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.7 }}
         >
-          ENGINEERING<br />
+          {t("hero.title1")}<br />
           <span className="primary-gradient-text">
             {displayText}
             <motion.span
@@ -200,8 +202,8 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
         >
-          MST Blockchain is a next-generation EVM Compatible Layer-1 blockchain, designed to make Web3{" "}
-          <span className="text-primary font-black">secure, accessible, and affordable</span> for everyone.
+          {t("hero.desc")}{" "}
+          <span className="text-primary font-black">{t("hero.desc2")}</span> {t("hero.desc3")}
         </motion.p>
 
         <motion.div
@@ -210,7 +212,13 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.55 }}
         >
-          {["Simple", "Accessible", "Reliable", "Affordable", "Limitless"].map((word, i) => {
+          {[
+            { key: "saral.simple", word: "Simple" },
+            { key: "saral.accessible", word: "Accessible" },
+            { key: "saral.reliable", word: "Reliable" },
+            { key: "saral.affordable", word: "Affordable" },
+            { key: "saral.limitless", word: "Limitless" },
+          ].map((item, i) => {
             const saralColors = [
               "from-emerald-500/20 to-teal-500/20 border-emerald-500/40 text-emerald-600",
               "from-blue-500/20 to-cyan-500/20 border-blue-500/40 text-blue-600",
@@ -220,14 +228,14 @@ const HeroSection = () => {
             ];
             return (
               <motion.span
-                key={word}
+                key={item.word}
                 className={`px-3 py-1.5 bg-gradient-to-r ${saralColors[i]} border text-[10px] font-black uppercase tracking-[0.15em]`}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.6 + i * 0.05 }}
                 whileHover={{ scale: 1.1 }}
               >
-                {word}
+                {t(item.key)}
               </motion.span>
             );
           })}
@@ -240,23 +248,23 @@ const HeroSection = () => {
           transition={{ delay: 0.7 }}
         >
           <motion.button
-            className="px-6 md:px-8 py-3 primary-gradient text-primary-foreground font-black text-xs uppercase tracking-[0.15em] hover:opacity-90 transition-all primary-glow-shadow relative overflow-hidden"
+            className="px-6 md:px-8 py-3 primary-gradient text-primary-foreground font-black text-xs uppercase tracking-[0.15em] transition-all primary-glow-shadow btn-gradient-hover relative overflow-hidden"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
           >
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent z-0"
               animate={{ x: ["-100%", "200%"] }}
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 4 }}
             />
-            Explore Ecosystem
+            <span className="relative z-10">{t("hero.explore")}</span>
           </motion.button>
           <motion.button
-            className="px-6 md:px-8 py-3 border-2 border-foreground text-foreground font-black text-xs uppercase tracking-[0.15em] hover:bg-secondary hover:text-secondary-foreground transition-all"
+            className="px-6 md:px-8 py-3 border-2 border-foreground text-foreground font-black text-xs uppercase tracking-[0.15em] btn-gradient-hover hover:text-primary-foreground transition-all"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
           >
-            Read Docs
+            <span className="relative z-10">{t("hero.docs")}</span>
           </motion.button>
         </motion.div>
 

@@ -2,21 +2,23 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import mstLogo from "@/assets/mst-logo.png";
-
-const navLinks = [
-  { label: "Build", href: "#foundation" },
-  { label: "Products", href: "#products" },
-  { label: "Explorer", href: "#explorer" },
-  { label: "Use Cases", href: "#usecases" },
-  { label: "Grants", href: "/grants", isRoute: true },
-  { label: "Ambassador", href: "/ambassador", isRoute: true },
-  { label: "Academy", href: "/academy", isRoute: true },
-];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("Build");
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { label: t("nav.build"), key: "Build", href: "#foundation" },
+    { label: t("nav.products"), key: "Products", href: "#products" },
+    { label: t("nav.explorer"), key: "Explorer", href: "#explorer" },
+    { label: t("nav.usecases"), key: "Use Cases", href: "#usecases" },
+    { label: t("nav.grants"), key: "Grants", href: "/grants", isRoute: true },
+    { label: t("nav.ambassador"), key: "Ambassador", href: "/ambassador", isRoute: true },
+    { label: t("nav.academy"), key: "Academy", href: "/academy", isRoute: true },
+  ];
 
   const scrollTo = (id: string) => {
     if (window.location.pathname !== "/") {
@@ -55,7 +57,7 @@ const Navbar = () => {
             {navLinks.map((link) =>
               link.isRoute ? (
                 <Link
-                  key={link.label}
+                  key={link.key}
                   to={link.href}
                   className="font-medium hover:text-primary transition-colors relative py-1"
                 >
@@ -63,17 +65,17 @@ const Navbar = () => {
                 </Link>
               ) : (
                 <button
-                  key={link.label}
+                  key={link.key}
                   onClick={() => {
-                    setActive(link.label);
+                    setActive(link.key);
                     scrollTo(link.href);
                   }}
                   className={`font-medium hover:text-primary transition-colors relative py-1 ${
-                    active === link.label ? "text-primary font-bold" : "text-foreground"
+                    active === link.key ? "text-primary font-bold" : "text-foreground"
                   }`}
                 >
                   {link.label}
-                  {active === link.label && (
+                  {active === link.key && (
                     <motion.div
                       className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-primary"
                       layoutId="nav-underline"
@@ -87,12 +89,12 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-3">
           <motion.button
-            className="hidden md:block px-4 py-2 primary-gradient text-primary-foreground hover:opacity-90 font-black uppercase text-[10px] tracking-[0.15em] transition-all primary-glow-shadow"
+            className="hidden md:block px-4 py-2 primary-gradient text-primary-foreground hover:opacity-90 font-black uppercase text-[10px] tracking-[0.15em] transition-all primary-glow-shadow btn-gradient-hover"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => scrollTo("#ecosystem")}
           >
-            Join Ecosystem
+            <span>{t("nav.join")}</span>
           </motion.button>
           <button className="md:hidden" onClick={() => setOpen(!open)}>
             {open ? <X size={22} /> : <Menu size={22} />}
@@ -111,7 +113,7 @@ const Navbar = () => {
             {navLinks.map((link, i) =>
               link.isRoute ? (
                 <Link
-                  key={link.label}
+                  key={link.key}
                   to={link.href}
                   className="font-medium text-foreground hover:text-primary"
                   onClick={() => setOpen(false)}
@@ -120,13 +122,13 @@ const Navbar = () => {
                 </Link>
               ) : (
                 <motion.button
-                  key={link.label}
+                  key={link.key}
                   className="font-medium text-foreground hover:text-primary text-left"
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: i * 0.05 }}
                   onClick={() => {
-                    setActive(link.label);
+                    setActive(link.key);
                     scrollTo(link.href);
                   }}
                 >
@@ -135,10 +137,10 @@ const Navbar = () => {
               )
             )}
             <button
-              className="mt-2 px-4 py-2 primary-gradient text-primary-foreground font-black uppercase text-[10px] tracking-[0.15em]"
+              className="mt-2 px-4 py-2 primary-gradient text-primary-foreground font-black uppercase text-[10px] tracking-[0.15em] btn-gradient-hover"
               onClick={() => scrollTo("#ecosystem")}
             >
-              Join Ecosystem
+              <span>{t("nav.join")}</span>
             </button>
           </motion.div>
         )}
