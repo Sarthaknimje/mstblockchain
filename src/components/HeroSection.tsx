@@ -175,7 +175,7 @@ const HeroSection = () => {
             animate={{ x: ["-100%", "200%"] }}
             transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
           />
-          Next-Gen EVM Layer-1 Blockchain
+          {t("hero.badge")}
         </motion.span>
 
         <motion.h1
