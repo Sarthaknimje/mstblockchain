@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Wallet, Search, Users, ArrowRight, Zap, Shield, Globe, Cpu, Hexagon, Triangle } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/contexts/LanguageContext";
 import mstLogo from "@/assets/mst-logo.png";
 
 const products = [
