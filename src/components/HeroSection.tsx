@@ -247,23 +247,23 @@ const HeroSection = () => {
           transition={{ delay: 0.7 }}
         >
           <motion.button
-            className="px-6 md:px-8 py-3 primary-gradient text-primary-foreground font-black text-xs uppercase tracking-[0.15em] hover:opacity-90 transition-all primary-glow-shadow relative overflow-hidden"
+            className="px-6 md:px-8 py-3 primary-gradient text-primary-foreground font-black text-xs uppercase tracking-[0.15em] transition-all primary-glow-shadow btn-gradient-hover relative overflow-hidden"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
           >
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent z-0"
               animate={{ x: ["-100%", "200%"] }}
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 4 }}
             />
-            Explore Ecosystem
+            <span className="relative z-10">{t("hero.explore")}</span>
           </motion.button>
           <motion.button
-            className="px-6 md:px-8 py-3 border-2 border-foreground text-foreground font-black text-xs uppercase tracking-[0.15em] hover:bg-secondary hover:text-secondary-foreground transition-all"
+            className="px-6 md:px-8 py-3 border-2 border-foreground text-foreground font-black text-xs uppercase tracking-[0.15em] btn-gradient-hover hover:text-primary-foreground transition-all"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
           >
-            Read Docs
+            <span className="relative z-10">{t("hero.docs")}</span>
           </motion.button>
         </motion.div>
 
