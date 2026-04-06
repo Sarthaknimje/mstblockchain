@@ -211,7 +211,13 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.55 }}
         >
-          {["Simple", "Accessible", "Reliable", "Affordable", "Limitless"].map((word, i) => {
+          {[
+            { key: "saral.simple", word: "Simple" },
+            { key: "saral.accessible", word: "Accessible" },
+            { key: "saral.reliable", word: "Reliable" },
+            { key: "saral.affordable", word: "Affordable" },
+            { key: "saral.limitless", word: "Limitless" },
+          ].map((item, i) => {
             const saralColors = [
               "from-emerald-500/20 to-teal-500/20 border-emerald-500/40 text-emerald-600",
               "from-blue-500/20 to-cyan-500/20 border-blue-500/40 text-blue-600",
@@ -221,14 +227,14 @@ const HeroSection = () => {
             ];
             return (
               <motion.span
-                key={word}
+                key={item.word}
                 className={`px-3 py-1.5 bg-gradient-to-r ${saralColors[i]} border text-[10px] font-black uppercase tracking-[0.15em]`}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.6 + i * 0.05 }}
                 whileHover={{ scale: 1.1 }}
               >
-                {word}
+                {t(item.key)}
               </motion.span>
             );
           })}
