@@ -114,6 +114,7 @@ const Web3Background = () => (
 
 const HeroSection = () => {
   const { t } = useLanguage();
+  const [currentProduct, setCurrentProduct] = useState(0);
   const [wordIdx, setWordIdx] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
