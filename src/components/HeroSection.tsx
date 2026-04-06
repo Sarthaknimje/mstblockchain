@@ -201,8 +201,8 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
         >
-          MST Blockchain is a next-generation EVM Compatible Layer-1 blockchain, designed to make Web3{" "}
-          <span className="text-primary font-black">secure, accessible, and affordable</span> for everyone.
+          {t("hero.desc")}{" "}
+          <span className="text-primary font-black">{t("hero.desc2")}</span> {t("hero.desc3")}
         </motion.p>
 
         <motion.div
