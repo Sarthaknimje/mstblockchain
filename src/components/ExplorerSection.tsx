@@ -113,9 +113,9 @@ const ExplorerSection = () => {
           <ScrollReveal>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
-                <span className="label-style text-primary mb-3 block">Live Network</span>
+                <span className="label-style text-primary mb-3 block">{t("explorer.label")}</span>
                 <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase">
-                  MST Network <span className="primary-gradient-text">Explorer</span>
+                  {t("explorer.title")} <span className="primary-gradient-text">{t("explorer.title2")}</span>
                 </h2>
               </div>
               <div className="flex items-center gap-4">
@@ -125,7 +125,7 @@ const ExplorerSection = () => {
                   transition={{ duration: 2, repeat: Infinity }}
                 >
                   <motion.div className="w-2 h-2 rounded-full bg-emerald-500" animate={{ scale: [1, 1.5, 1] }} transition={{ duration: 1, repeat: Infinity }} />
-                  <span className="text-[10px] font-black uppercase tracking-[0.15em] text-emerald-400">Live — 3s Block Time</span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.15em] text-emerald-400">{t("explorer.live")}</span>
                 </motion.div>
               </div>
             </div>
@@ -136,10 +136,10 @@ const ExplorerSection = () => {
         <ScrollReveal delay={0.05}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
             {[
-              { label: "Total Transactions", value: totalTxns.toLocaleString(), icon: Hash, gradient: "from-cyan-500/15 to-blue-500/5", border: "border-cyan-500/20", text: "text-cyan-400" },
-              { label: "Gas Price", value: "0.001 Gwei", icon: Flame, gradient: "from-amber-500/15 to-orange-500/5", border: "border-amber-500/20", text: "text-amber-400" },
-              { label: "Avg Block Time", value: "3.0s", icon: Clock, gradient: "from-emerald-500/15 to-teal-500/5", border: "border-emerald-500/20", text: "text-emerald-400" },
-              { label: "Active Validators", value: "69,241", icon: Activity, gradient: "from-violet-500/15 to-purple-500/5", border: "border-violet-500/20", text: "text-violet-400" },
+              { label: t("explorer.totalTx"), value: totalTxns.toLocaleString(), icon: Hash, gradient: "from-cyan-500/15 to-blue-500/5", border: "border-cyan-500/20", text: "text-cyan-400" },
+              { label: t("explorer.gasPrice"), value: "0.001 Gwei", icon: Flame, gradient: "from-amber-500/15 to-orange-500/5", border: "border-amber-500/20", text: "text-amber-400" },
+              { label: t("explorer.avgBlock"), value: "3.0s", icon: Clock, gradient: "from-emerald-500/15 to-teal-500/5", border: "border-emerald-500/20", text: "text-emerald-400" },
+              { label: t("explorer.activeVal"), value: "69,241", icon: Activity, gradient: "from-violet-500/15 to-purple-500/5", border: "border-violet-500/20", text: "text-violet-400" },
             ].map((s) => (
               <motion.div
                 key={s.label}
@@ -166,7 +166,7 @@ const ExplorerSection = () => {
                 <div className="flex justify-between items-center mb-5 border-b border-foreground/10 pb-3">
                   <h3 className="text-base md:text-lg font-black uppercase flex items-center gap-2">
                     <Blocks size={18} className="text-primary" />
-                    Latest Blocks
+                    {t("explorer.latestBlocks")}
                   </h3>
                   <motion.div
                     className="flex items-center gap-1.5"
@@ -224,7 +224,7 @@ const ExplorerSection = () => {
                 <div className="flex justify-between items-center mb-5 border-b border-foreground/10 pb-3">
                   <h3 className="text-base md:text-lg font-black uppercase flex items-center gap-2">
                     <ArrowLeftRight size={18} className="text-primary" />
-                    Latest Transactions
+                    {t("explorer.latestTx")}
                   </h3>
                   <div className="flex gap-1.5">
                     {txTypes.map((t) => {
@@ -291,7 +291,7 @@ const ExplorerSection = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              Visit MSTScan Explorer
+              {t("explorer.visit")}
             </motion.a>
           </ScrollReveal>
         </div>
