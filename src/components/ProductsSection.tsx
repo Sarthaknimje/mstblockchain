@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Wallet, Search, ArrowLeftRight, Bot, Code, Gift, ExternalLink } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/contexts/LanguageContext";
 import productWallet from "@/assets/product-wallet.jpg";
 import productExplorer from "@/assets/product-explorer.jpg";
 import productBridge from "@/assets/product-bridge.jpg";
@@ -54,6 +55,7 @@ const products = [
 ];
 
 const ProductsSection = () => {
+  const { t } = useLanguage();
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -72,9 +74,9 @@ const ProductsSection = () => {
       <div className="relative z-10">
         <div className="mb-10 md:mb-16">
           <ScrollReveal>
-            <span className="label-style text-primary mb-3 block">SARAL Infrastructure</span>
+            <span className="label-style text-primary mb-3 block">{t("products.label")}</span>
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase">
-              Ecosystem <span className="primary-gradient-text">Products</span>
+              {t("products.title")} <span className="primary-gradient-text">{t("products.title2")}</span>
             </h2>
           </ScrollReveal>
         </div>
@@ -159,7 +161,7 @@ const ProductsSection = () => {
                 className={`inline-flex items-center gap-2 label-style ${product.text} hover:underline`}
                 whileHover={{ x: 4 }}
               >
-                Explore {product.name} <ExternalLink size={12} />
+                {t("products.explore")} {product.name} <ExternalLink size={12} />
               </motion.a>
             </div>
           </motion.div>
