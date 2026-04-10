@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LayoutGrid, ArrowLeftRight, Zap, ArrowUpRight, ArrowDownLeft, FileCode, Flame, Clock, Hash, Blocks, Activity } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type TxType = "send" | "receive" | "contract" | "swap";
 
@@ -76,6 +77,7 @@ const generateTx = () => {
 };
 
 const ExplorerSection = () => {
+  const { t } = useLanguage();
   const [blocks, setBlocks] = useState(() => Array.from({ length: 5 }, (_, i) => generateBlock(i)));
   const [txns, setTxns] = useState(() => Array.from({ length: 6 }, () => generateTx()));
   const [blockCount, setBlockCount] = useState(0);
